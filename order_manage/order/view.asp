@@ -723,7 +723,7 @@
 	                                   	<td width="38" align="center"><b>비고2</b></td>
 	                                   	<td width="182"><input name="Bigo2" type="text" style="background-color:#ffffff;border:1 solid #859ABB" size="29" maxlength="40"></td>
 	                                   	<td width=30><b>일자</b></td>
-	                                   	<td width=54><input name="NowDate" id="NowDate" type="text" style="background-color:#ffffff;border:1px solid #FF7200" size="8" maxlength="8" value="<%=sT801Date%>" onkeyup="checkNumber(<%=Replace(Date(),"-","")%>);" autocomplete="off"></td>
+	                                   	<td width=54><input name="NowDate" id="NowDate" type="text" style="background-color:#ffffff;border:1px solid #FF7200" size="8" maxlength="8" value="<%=sT801Date%>" readonly="readonly" autocomplete="off"></td>
 	                                   	<td width=18><img src="../img/btn/cal_icon.gif" border="0" onclick="document.getElementById('NowDate').focus(); return false;" style="cursor:pointer" alt="달력보기"></td>	                                   	
 	      								</tr>
 	                                  	</table>
