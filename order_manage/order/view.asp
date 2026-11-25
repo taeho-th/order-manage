@@ -9,7 +9,22 @@
 <Script type="text/javascript" src="/include/main.js"></script>
 <Script type="text/javascript" src="order.js"></script>
 <script type="text/javascript" src="/js/jquery/jquery-1.12.3.min.js"></script>
-</head>
+<script type="text/javascript" src="/js/jQuery/jquery-ui.min.js"></script>
+<style type="text/css">
+.ui-datepicker { width: 17em; padding: 4px; background: #ffffff; border: 1px solid #78AAE5; box-shadow: 0 2px 8px #999999; z-index: 9999 !important; font-size: 12px; }
+.ui-datepicker .ui-datepicker-header { position: relative; padding: 4px 0; background: #78AAE5; color: #ffffff; }
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next { position: absolute; top: 4px; cursor: pointer; color: #ffffff; }
+.ui-datepicker .ui-datepicker-prev { left: 6px; }
+.ui-datepicker .ui-datepicker-prev:after { content: "<"; }
+.ui-datepicker .ui-datepicker-next { right: 6px; }
+.ui-datepicker .ui-datepicker-next:after { content: ">"; }
+.ui-datepicker .ui-datepicker-title { margin: 0 30px; text-align: center; font-weight: bold; }
+.ui-datepicker select { color: #333333; }
+.ui-datepicker table { width: 100%; border-collapse: collapse; font-size: 11px; }
+.ui-datepicker th, .ui-datepicker td { padding: 2px; text-align: center; }
+.ui-datepicker td a { display: block; padding: 3px; color: #333333; text-decoration: none; }
+.ui-datepicker td a:hover { background: #EEF4F7; color: #174E8A; }
+</style></head>
 <body leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0">
 <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
   <tr>
@@ -708,8 +723,8 @@
 	                                   	<td width="38" align="center"><b>비고2</b></td>
 	                                   	<td width="182"><input name="Bigo2" type="text" style="background-color:#ffffff;border:1 solid #859ABB" size="29" maxlength="40"></td>
 	                                   	<td width=30><b>일자</b></td>
-	                                   	<td width=54><input name="NowDate" type="text" style="background-color:#ffffff;border:1 solid #FF7200" size="7" maxlength=8 value="<%=sT801Date%>" onkeyup="checkNumber(<%=Replace(Date(),"-","")%>);" ondblclick="cal_pop('opener.document.listform.NowDate',500);" onfocus="blur();"></td>
-	                                   	<td width=18><img src="../img/btn/cal_icon.gif" border=0 onclick="cal_pop('opener.document.listform.NowDate',500);" style="cursor:hand" alt="달력보기"></td>	                                   	
+	                                   	<td width=54><input name="NowDate" id="NowDate" type="text" style="background-color:#ffffff;border:1px solid #FF7200" size="8" maxlength="8" value="<%=sT801Date%>" onkeyup="checkNumber(<%=Replace(Date(),"-","")%>);" autocomplete="off"></td>
+	                                   	<td width=18><img src="../img/btn/cal_icon.gif" border="0" onclick="document.getElementById('NowDate').focus(); return false;" style="cursor:pointer" alt="달력보기"></td>	                                   	
 	      								</tr>
 	                                  	</table>
 	                                  </td>
@@ -933,6 +948,20 @@
 </table>
 <script type="text/javascript">
 $("document").ready(function() {
+	$("#NowDate").datepicker({
+		dateFormat: "yymmdd",
+		showOn: "focus",
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "c-10:c+10",
+		firstDay: 0,
+		monthNames: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+		monthNamesShort: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+		dayNames: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"],
+		dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
+		currentText: "오늘",
+		closeText: "닫기"
+	});
 	$("#chk_all").prop("checked", false);
 
 	$("#chk_all").click(function() {
@@ -975,11 +1004,6 @@ function fnWiseUpSend() {
 	}	
 }
 
-function cal_pop(tform,t) {
-	var winl = (screen.width - 192) / 2 + 220;
-	winprops = 'width=192,height=181,top='+t+',left='+winl+',menubar=no, toolbar=no, status=no,scrollbars=no';
-	window.open("../include/calendar_admin.asp?tform="+tform,"calendarpop",winprops);
-}
 function funcSortchg(kind) {
 	document.viewform.sorttype.value = kind;
 	document.viewform.submit();
