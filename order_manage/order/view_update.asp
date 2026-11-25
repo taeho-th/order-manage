@@ -156,30 +156,17 @@ elseif job = "AD" then  '''선택 일괄 삭제라면
 	Set rs = Nothing
 	
 elseif job = "M" then
-	Query = "Update Elt_Order Set T801_Gubun2 = '3' " _
-	Query = Query & "Where T801_106Code = '"& T106code &"' " _
-	Query = Query & "and T801_Date = '"& bdate &"' " _
-	Query = Query & "and T801_110Code = '"& buserid &"' " _
-	Query = Query & "and T801_No = '"& bonum &"' "
+	
+	Query = "Update Elt_Order Set T801_Gubun2 = '3' Where T801_106Code = '"& T106code &"' and T801_Date = '"& bdate &"' and T801_110Code = '"& buserid &"' and T801_No = '"& bonum &"' "
 	DB_Web.Execute(Query)
 
-	Query = "Update Elt_Order_Detail Set T801_Gubun2 = '3' " _
-	Query = Query & "Where T801_106Code = '"& T106code &"' " _
-	Query = Query & "and T801_Date = '"& bdate &"' " _
-	Query = Query & "and T801_110Code = '"& buserid &"' " _
-	Query = Query & "and T801_No = '"& bonum &"' "
+
+
+	Query = "Update Elt_Order_Detail Set T801_Gubun2 = '3' Where T801_106Code = '"& T106code &"' and T801_Date = '"& bdate &"' and T801_110Code = '"& buserid &"' and T801_No = '"& bonum &"' "
 	DB_Web.Execute(Query)
+	
+
 elseif job = "B" then  '''증정처 수정이라면 (증정인 경우)
-	bigo_wise = Request("bigo_wise"&bcode)	
-	bigo_wise = Replace(bigo_wise,"'","''")
-	Query = ""
-	Query = Query &" 	Update Elt_Order_Detail 				"
-	Query = Query &" 	Set T801_Bigo = '"& bigo_wise &"'		"
-	Query = Query &" 	Where T801_106Code = '"& T106code &"' 	"
-	Query = Query &" 		and T801_Date = '"& bdate &"' 		"
-	Query = Query &" 		and T801_110Code = '"& buserid &"' 	"
-	Query = Query &" 		and T801_No = '"& bonum &"' 		"
-	Query = Query &" 		and T801_Code = '"& bcode &"' 		"
 	DB_Web.Execute(Query)
 else 
 	snum = Request("snum"&bcode)	'수정수량

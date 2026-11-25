@@ -281,10 +281,20 @@
 						<tr>
 		                    <td height="20" align="left" valign="top">
 		                     <font color="FF7200"> &nbsp;※ 수량,할인율을 변경 하시려면 해당 도서에 변경 할 숫자를 입력하시고 변경 버튼을 클릭하세요.</font>
- 							 <input style="width:90px;height:19px;color:black;background-color:#fcfcfc;border:1 solid #999999" type="button" value="재고 0개 선택" onclick="fnStockSel();">&nbsp;
+ 							 </td>
+		                </tr>
+		                <tr>
+		                    <td align="right" valign="top">
+							 <input style="width:90px;height:19px;color:black;background-color:#fcfcfc;border:1 solid #999999" type="button" value="재고 0개 선택" onclick="fnStockSel();">&nbsp;
  							 <input style="width:70px;height:19px;color:black;background-color:#fcfcfc;border:1 solid #999999" type="button" value="선택 삭제" onclick="fnAllDel();">&nbsp;
  							 <input style="width:85px;height:19px;color:black;background-color:#fcfcfc;border:1 solid #999999" type="button" value="재고업데이트" onclick="fnWiseUpSend();">
-							 <input style="width:75px;height:19px;color:black;background-color:#fcfcfc;border:1 solid #999999" type="button" value="매절 변경" onclick="fnMaejeolChange();">
+							<%
+							if Tgubun2 = "1" then 
+							%>
+							 <input style="width:85px;height:20px;color:#ffffff;background-color:#e65f20;border:1px solid #b94310;font-weight:bold" type="button" value="매절 변경" onclick="fnMaejeolChange();">
+							<%
+							End if
+							%>
 		                    </td>
 		                </tr>
 		                <%end if%>
@@ -1001,19 +1011,33 @@ function fnChkSel(){
 	}
 }
 
-//선택 삭제
+//매절 변경
 function fnMaejeolChange(){
-	if (!confirm("선택한 주문 전체를 매절 처리하고 현재 화면으로 돌아오시겠습니까?")) {
+	
+	if (!confirm("선택한 주문 접수 건을 매절로 변경하시겠습니까?")) {
+		
 		return;
+	
 	}
+	
 	var obj = document.listform;
+	
 	$('input[name="bdate"]').val($('input[name="odate"]').val());
+	
 	$('input[name="buserid"]').val($('input[name="ouserid"]').val());
+	
 	$('input[name="bonum"]').val($('input[name="onum"]').val());
+	
 	obj.action = "view_update.asp";
+	
 	obj.job.value = "M";
+	
 	obj.submit();
+
 }
+
+
+//선택 삭제
 function fnAllDel(){
 	fnChkSel();
 	if (nSeq == "")	{
